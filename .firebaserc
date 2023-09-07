@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "dtapp3-c1f9c"
+  },
+  "targets": {
+    "dtapp3-c1f9c": {
+      "hosting": {
+        "DTAPP3": [
+          "dtapp3-c1f9c"
+        ]
+      }
+    }
   }
 }
