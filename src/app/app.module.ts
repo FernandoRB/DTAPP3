@@ -1,3 +1,4 @@
+import * as fs from "fs";
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
