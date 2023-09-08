@@ -10,7 +10,7 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { provideStorage,getStorage } from '@angular/fire/storage';
-// import { FilterPipe } from './pipes/filter.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
 
 //Components
 import { AppComponent } from './app.component';
@@ -26,8 +26,8 @@ import { MainComponent } from './components/main/main.component';
     DashboardComponent,
     CreateComponent,
     LoginComponent,
-    MainComponent
-    // FilterPipe
+    MainComponent,
+    FilterPipe
   ],
   imports: [
     FormsModule,
