@@ -1,18 +1,19 @@
-.container {
+.container{ 
+border-radius: 5px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	min-height: 400px;
+	min-height: 500px;
 	max-height: 650px;
-	max-width: 360px;
+	max-width: 400px;
 }
 .title{
 	display: flex;
 	text-align: start;
 	padding-left:10px;
 	font-size: 1.6rem;
-	height: 40px;
-	width: 140px;
+	height: 80px;
+	width: 200px;
 	color: #fff;
 	background-color:#160c64 ;
 	border-radius: 15px;
@@ -21,9 +22,10 @@
 .screen {
 	background: linear-gradient(90deg, #160c64, #160c64);		
 	position: relative;	
-	height: 600px;
+	height: 720px;
 	width: 360px;	
-	box-shadow: 0px 0px 24px #5C5696;
+	border-radius: 10px;
+	box-shadow: 0px 0px 24px #160c64;
 }
 
 .screen__content {
@@ -98,7 +100,7 @@
 .login__icon {
 	position: absolute;
 	top: 30px;
-	color: #7875B5;
+	color: #160c64;
 }
 
 .login__input {
@@ -116,7 +118,7 @@
 .login__input:focus,
 .login__input:hover {
 	outline: none;
-	border-bottom-color: #6A679E;
+	border-bottom-color: #160c64;
 }
 
 .login__submit {
@@ -131,8 +133,8 @@
 	display: flex;
 	align-items: center;
 	width: 100%;
-	color: #4C489D;
-	box-shadow: 0px 2px 2px #5C5696;
+	color: #160c64;
+	box-shadow: 0px 2px 2px #160c64;
 	cursor: pointer;
 	transition: .2s;
 }
@@ -147,7 +149,7 @@
 .button__icon {
 	font-size: 24px;
 	margin-left: auto;
-	color: #7875B5;
+	color: #2a267a;
 }
 
 .social-login {	
