@@ -83,7 +83,7 @@
   
   
   #container-table{
-    background-color: #160c64;
+    background: linear-gradient(90deg, #160c64, #3f29e3);		
     display: flex;
     position: relative;
     left: 130px; 
@@ -91,7 +91,8 @@
     padding:10px;
     padding-top:50px;
     justify-content: center;
-    min-height: 650px;
+    /* min-height: 600px; */
+    height:550px;
     min-width: 220px;
     max-width: 950px; 
     color: #fff;
