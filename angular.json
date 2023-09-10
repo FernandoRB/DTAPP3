@@ -27,7 +27,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [ "../node_modules/lodash/lodash.min.js"]
+            "scripts": []
           },
           "configurations": {
             "production": {
