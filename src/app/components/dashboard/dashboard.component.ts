@@ -1,12 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
+import { UsersService } from 'src/app/services/users.service';
 import { ClientsService } from 'src/app/services/clients.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import Clients from 'src/app/interfaces/clients.interface';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
+import * as xlsx from "xlsx";
 
-
+let timeRef = new Date();
+timeRef.getFullYear(); 
 
 @Component({
   selector: 'app-dashboard',
@@ -14,6 +17,15 @@ import { Subject } from 'rxjs';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnDestroy, OnInit {
+  today: number = Date.now();
+  ExcelData:any;
+  CurrentTime:any;
+  title = 'pagination';
+  POSTS: any;
+  page:number = 1;
+  count: number = 0;
+  tableSize: number = 10;
+  tableSizes: any = [5, 10, 15, 20];
   router: any;
   formulary: FormGroup;
   menuItems: any[] | undefined;
@@ -51,7 +63,20 @@ export class DashboardComponent implements OnDestroy, OnInit {
   dtTrigger: Subject<any> = new Subject<any>();
   data: any;
 
+  datepicker:any;
+  querys: any;
+  db: any;
+
+  Seasons = [
+    { id: 1, name: 'Spring', fruit: 'Orange' },
+    { id: 2, name: 'Summer', fruit: 'Mango' },
+    { id: 3, name: 'Winter', fruit: 'Apple' },
+    { id: 4, name: 'Autumn', fruit: 'Banana' },
+  ];
+  name = 'ExcelSheet.xlsx';
+
   constructor(
+    private UsersService:UsersService,     
     private clientService: ClientsService,
     private userService: UserService,
     //Datatable
@@ -72,11 +97,12 @@ export class DashboardComponent implements OnDestroy, OnInit {
     })
   }
 
-  ngOnInit(): void {
-    this.clientService.getService().subscribe(clients => {
+  async ngOnInit(): Promise<void> {
+    this.clientService.getService().subscribe(clients => { 
       console.log(clients)
       this.clients = clients;
-      // this.dtTrigger.next;
+      //Pagination
+      this.postList();
 
     })
 
@@ -94,8 +120,29 @@ export class DashboardComponent implements OnDestroy, OnInit {
       //   this.dtTrigger.next;
       // });
     //Datatable Stop
+  }
+  exportToExcel(): void {
+    let element = document.getElementById('dataTables-example');
+    const worksheet: xlsx.WorkSheet = xlsx.utils.table_to_sheet(element);
+    const book: xlsx.WorkBook = xlsx.utils.book_new();
+    xlsx.utils.book_append_sheet(book, worksheet, 'Sheet1');
+    xlsx.writeFile(book, this.name);
+  }
+  postList():void{
+    this.UsersService.getAllPosts().subscribe((response) =>{
+      this.posts = response;
+      console.log(this.posts);
+    })
+  }
+  onTableDataChange(event:any){
+    this.page = event;
+    this.postList();
 
-
+  }
+  onTableSizeChange(event:any): void{
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.postList();
   }
   //Login
   onClick() {
@@ -105,9 +152,17 @@ export class DashboardComponent implements OnDestroy, OnInit {
       })
       .catch(error => console.log(error));
   }
+
+  
+  async onClickDelete(clients: Clients) {
+    const response = await this.clientService.deletService(clients);
+    console.log(response);
+  }
+
+
+
   //Datatable
   ngOnDestroy(): void {
-    this.dtTrigger.unsubscribe();
-      }
-
+        this.dtTrigger.unsubscribe();
+          }
 }

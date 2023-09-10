@@ -118,7 +118,7 @@
   position: relative; 
   width: 100px;
   height: 40px;
-  background-color: gray;
+  background-color: rgb(234, 221, 221);
 }
 
 input{
@@ -129,8 +129,23 @@ input{
   height: 40px;
   padding-left:2px;
   padding-right: 2px;
-  color: #fff;
+  background-color: #fff;
+  color: black;
 }
+
+input:active{
+  width: 160px;
+  height: 50px;
+}
+
+#send-form:active{
+  position: relative;
+  top:20px;
+  width: 110px;
+  height: 50px;
+}
+
+
 
 
 #setting-nav{

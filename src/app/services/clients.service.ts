@@ -22,7 +22,7 @@ export class ClientsService {
     return collectionData(clientRef, { idField: 'id' }) as Observable<Clients[]>;
   }
 
-  deleService(client: Clients) {
+  deletService(client: Clients) {
     const placeDocRef = doc(this.firestore, `clients/${client.id}`);
     return deleteDoc(placeDocRef);
   }

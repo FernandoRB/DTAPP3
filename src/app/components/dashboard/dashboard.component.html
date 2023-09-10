@@ -39,6 +39,8 @@
     </li> 
   </ul>
   </div> 
+
+
 <!--login Nav-->
 <div class="float-end bg-light" id="setting-nav">
     <ul class="nav flex-row">
@@ -57,27 +59,40 @@
     </ul>
   </div> 
 
+<div>
+  <input type="text" class="forms-control" placeholder="Buscar" [(ngModel)]="filterpost" name="filterpost" id="input-search"/>
+</div>
+<div  id="delete-button">
+  <p>{{today |  date:'fullDate' | titlecase}}</p>
+</div>
+<div>
+  <button  id="export" (click)="exportToExcel()">Exportar</button>
+</div>
 
 <div class="container" id="container-table">
+  <select (change)="onTableSizeChange($event)" id="select-option">
+    <option *ngFor="let size of tableSizes">
+      {{size}} 
+    </option>
+  </select> 
 
-  <table class="table-bordered" class="table-td">
-    <input type="text" class="forms-control" placeholder="Buscar" [(ngModel)]="filterpost" name="filterpost" id="input-search"/>
-
-    <thead>
+  <table class="table-bordered" class="table-td" id="dataTables-example">
+    <thead class="thead">
       <tr style="color: #fff;">
         <th>Fecha</th>
-        <th>Nombre</th>
+        <th>Cliente</th>
         <th>Rut</th>
         <th>Contacto</th>
         <th>Fono</th>
-        <th>Direcciòn</th>
+        <th>Direccion</th>
         <th>Comuna</th>
         <th>Sistema</th>
         <th>Servicio</th>
       </tr>
     </thead>
     <tbody style="color: #160c64;" >
-      <tr *ngFor="let client of clients| filter: filterpost">
+      <!-- <tr *ngFor="let client of clients| filter: filterpost"> -->
+        <tr *ngFor="let client of clients | filter:filterpost | paginate:{itemsPerPage:tableSize, currentPage: page, totalItems: count}; let i = index">
         <td >{{client.date}}</td>
         <td>{{client.name}}</td>
         <td>{{client.identificator}}</td>
@@ -87,8 +102,15 @@
         <td>{{client.commune}}</td>
         <td>{{client.system}}</td>
         <td>{{client.service}}</td>
+        <button (click)="onClickDelete(client)" id="delete" class="btn" >
+          <i class="fa-solid fa-eraser" style="color: #b0b6bf;"></i>
+        </button>
       </tr>
     </tbody>
+    <div class="pagination-controls-list">
+      <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+      </pagination-controls>
+    </div> 
   </table>
 </div>
 

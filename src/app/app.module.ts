@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -11,7 +11,10 @@ import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { FilterPipe } from './pipes/filter.pipe';
-
+import {NgxPaginationModule} from 'ngx-pagination'; 
+import localEs from '@angular/common/locales/es'
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localEs, 'es')
 //Components
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -30,6 +33,7 @@ import { MainComponent } from './components/main/main.component';
     FilterPipe
   ],
   imports: [
+    NgxPaginationModule,
     FormsModule,
     BrowserModule,
     AppRoutingModule,
@@ -41,7 +45,7 @@ import { MainComponent } from './components/main/main.component';
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage())
   ],
-  providers: [],
+  providers: [{provide: LOCALE_ID, useValue: 'es'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
